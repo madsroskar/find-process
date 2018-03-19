@@ -29,6 +29,7 @@ Usage:
     -t, --type <type>  find process by keyword type (pid|port|name)
     -p, --port         find process by port
     -h, --help         output usage information
+    -k, --kill         kill found process
 
   Examples:
 
@@ -36,6 +37,7 @@ Usage:
     $ find-process 111           # find by pid "111"
     $ find-process -p 80         # find by port "80"
     $ find-process -t port 80    # find by port "80"
+    $ find-process -t port 80    # find by port "80", and kill the process
 
 ```
 
