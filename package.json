@@ -54,7 +54,8 @@
   "dependencies": {
     "chalk": "^2.0.1",
     "commander": "^2.11.0",
-    "debug": "^2.6.8"
+    "debug": "^2.6.8",
+    "kill-process": "^1.0.2"
   },
   "devDependencies": {
     "mocha": "^2.3.4",

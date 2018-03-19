@@ -7,6 +7,7 @@ const chalk = require('chalk')
 const debug = require('debug')('find-process')
 const find = require('..')
 const pkg = require('../package.json')
+var kill = require('kill-process')
 
 let type, keyword
 
@@ -14,6 +15,7 @@ program
   .version(pkg.version)
   .option('-t, --type <type>', 'find process by keyword type (pid|port|name)')
   .option('-p, --port', 'find process by port')
+  .option('-k, --kill', 'kill found process')
   .arguments('<keyword>')
   .action(function (kw) {
     keyword = kw
@@ -26,6 +28,7 @@ program
     console.log('    $ find-process 111           # find by pid "111"')
     console.log('    $ find-process -p 80         # find by port "80"')
     console.log('    $ find-process -t port 80    # find by port "80"')
+    console.log('    $ find-process -t port 80 --kill    # find by port "80", and kill the process')
     console.log()
   })
   .parse(process.argv)
@@ -66,6 +69,13 @@ find(type, keyword)
         console.log('pid: %s', chalk.white(item.pid))
         console.log('cmd: %s', chalk.white(item.cmd))
         console.log()
+
+        if (opts.kill) {
+          kill(item.pid).then(() => {
+            console.log("Process with pid " + item.pid + " killed.")
+            console.log()
+          });
+        }
       }
     } else {
       console.log('No process found')
